@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    container_name: p1a-backend
+    expose:
+      - "3000"
+    restart: always
+
+  nginx:
+    image: nginx:alpine
+    container_name: p1a-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend
+    restart: always
+
